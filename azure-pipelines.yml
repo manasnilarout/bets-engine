@@ -1,0 +1,21 @@
+trigger:
+  - azure-devops
+stages:
+ - stage: build
+   displayName: Build application
+   jobs:
+   - job: BuildApp
+     steps:
+       - script: sh "ops/init.sh" "$(DEPLOY_LOCATION)" "$(VAGRANT_CONFIG_LOCATION)" "$(APP_ENV_LOCATION)" "$(SQL_SCRIPT_LOCATION)"
+       - script: sh "ops/pre-build.sh" "$(DEPLOY_LOCATION)"
+       - script: cd $(DEPLOY_LOCATION) && vagrant ssh -c "sh /vagrant/ops/test.sh"
+       - script: cd $(DEPLOY_LOCATION) && vagrant ssh -c "sh /vagrant/ops/cleanup.sh"
+   - job: PublishArtifacts
+     dependsOn: BuildApp
+     steps:
+       - task: PublishBuildArtifacts@1
+         condition: not(eq(variables['Build.Reason'], 'PullRequest'))
+         inputs:
+           PathtoPublish: $(DEPLOY_LOCATION)
+           ArtifactName: 'caleido'
+           publishLocation: 'Container'
