@@ -1,9 +1,9 @@
-import { Logger } from 'caleido-lib/logger';
 import * as express from 'express';
 import morgan from 'morgan';
 import { ExpressMiddlewareInterface, Middleware } from 'routing-controllers';
 
 import { env } from '../../../env';
+import { Logger } from '../../../logger';
 
 @Middleware({ type: 'before' })
 export class LogMiddleware implements ExpressMiddlewareInterface {

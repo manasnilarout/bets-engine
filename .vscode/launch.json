@@ -18,7 +18,7 @@
         {
             "type": "node",
             "request": "attach",
-            "name": "Node: Caleido Remote Debugging",
+            "name": "Node: Pegasus Remote Debugging",
             "processId": "7086",
             "protocol": "inspector"
         }

@@ -48,10 +48,10 @@ $msg = <<MSG
 ---------------------------------------------------------------------
 Please refer the link for the documentation on using this Vagrant box -
 URL:
- - Vagrant - http://10.0.0.155/books/caleido/page/development-environment
+ - Vagrant - https://www.vagrantup.com/intro/getting-started/
 
 Please contact the following email if you have any doubts/suggestions
- - saimanohar.p@osmosys.asia
+ - manasnilarout@gmail.com
 ---------------------------------------------------------------------
 MSG
 

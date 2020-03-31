@@ -1,7 +1,7 @@
 {
-  "name": "node-starter-boilerplate",
+  "name": "pegasus",
   "version": "1.0.0",
-  "description": "A framework to bootstrap development using Node.js API Services with code written in TypeScript.",
+  "description": "An app for health care personals.",
   "main": "src/app.ts",
   "scripts": {
     "start": "nps",
@@ -15,7 +15,7 @@
   "engines": {
     "node": ">=10.0.0"
   },
-  "repository": "https://dev.azure.com/CaleidoHS/Ikanos/_git/node-boilerplate",
+  "repository": "https://github.com/manasnilarout/pegasus",
   "keywords": [
     "NodeJS",
     "TypeScript",
@@ -23,23 +23,17 @@
     "boilerplate"
   ],
   "author": {
-    "name": "Senthil Arumugam, Raguram Rajagopal, Samuel Sandegren",
-    "url": "http://www.inspironics.net/"
+    "name": "Manas Nilorout"
   },
-  "contributors": [
-    {
-      "name": "Osmosys Software Solutions",
-      "website": " https://osmosys.co/"
-    }
-  ],
+  "contributors": [],
   "husky": {
     "hooks": {
       "pre-commit": "nps lint.fix && nps lint"
     }
   },
   "dependencies": {
+    "@prolaera/exceljs": "^1.6.3",
     "@types/express": "^4.0.39",
-    "caleido-lib": "git+ssh://git@ssh.dev.azure.com:v3/CaleidoHS/Ikanos/caleido-lib",
     "chalk": "^2.4.1",
     "class-validator": "^0.9.1",
     "cls-hooked": "^4.2.2",
@@ -49,7 +43,7 @@
     "cors": "^2.8.4",
     "dotenv": "8.0.0",
     "event-dispatch": "0.4.1",
-    "exceljs": "^3.4.0",
+    "exceljs": "3.8.1",
     "express": "^4.16.2",
     "express-basic-auth": "^1.1.3",
     "express-status-monitor": "^1.0.1",
@@ -68,6 +62,7 @@
     "prom-client": "^12.0.0",
     "prometheus-api-metrics": "^2.2.3",
     "pug": "^2.0.4",
+    "redis": "^3.0.2",
     "reflect-metadata": "^0.1.10",
     "routing-controllers": "^0.7.6",
     "shortid": "^2.2.15",

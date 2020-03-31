@@ -49,7 +49,7 @@ Content of `launch.json` should look something like below.
 {
     "type": "node",
     "request": "attach",
-    "name": "Caleido Remote Debugging",
+    "name": "Pegasus Remote Debugging",
     "processId": `${ProcessID}`,
     "protocol": "inspector"
 }

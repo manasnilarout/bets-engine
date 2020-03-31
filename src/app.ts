@@ -1,21 +1,19 @@
 import 'reflect-metadata';
 
-import { Logger } from 'caleido-lib/logger';
 import { bootstrapMicroframework, MicroframeworkLoader } from 'microframework-w3tec';
 import { Connection } from 'typeorm';
 
-import { amqpLoader } from './loaders/amqpLoader';
 import { eventDispatchLoader } from './loaders/eventDispatchLoader';
 import { expressLoader } from './loaders/expressLoader';
 import { homeLoader } from './loaders/homeLoader';
 import { httpLoader } from './loaders/httpLoader';
 import { iocLoader } from './loaders/iocLoader';
 import { monitorLoader } from './loaders/monitorLoader';
-import { mqttLoader } from './loaders/mqttLoader';
 import { redisLoader } from './loaders/redisLoader';
 import { swaggerLoader } from './loaders/swaggerLoader';
 import { typeormLoader } from './loaders/typeormLoader';
 import { winstonLoader } from './loaders/winstonLoader';
+import { Logger } from './logger';
 import { banner } from './utils/banner';
 import { MigrationHelper } from './utils/migration.util';
 
@@ -54,8 +52,6 @@ if (
         homeLoader,
         httpLoader,
         redisLoader,
-        mqttLoader,
-        amqpLoader,
     ];
 }
 

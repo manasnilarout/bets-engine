@@ -1,6 +1,5 @@
-import { Logger } from 'caleido-lib/logger';
-
 import { env } from '../env';
+import { Logger } from '../logger';
 
 export function banner(log: Logger): void {
     if (env.app.banner) {

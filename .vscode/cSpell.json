@@ -6,8 +6,6 @@
     "language": "en",
     // words - list of words to be always considered correct
     "words": [
-        "abijeetpatro",
-        "caleido",
         "hsts",
         "Microframework",
         "mqtts",

@@ -1,7 +1,7 @@
-import { Container } from 'typedi';
 import * as cls from 'cls-hooked';
-import { LoggerOptions } from 'caleido-lib/types';
-import { Logger as WinstonLogger } from 'caleido-lib/logger';
+import { Container } from 'typedi';
+
+import { Logger as WinstonLogger, LoggerOptions } from '../logger';
 
 export function Logger(scope: string, namespace?: string): ParameterDecorator {
 
@@ -21,4 +21,4 @@ export function Logger(scope: string, namespace?: string): ParameterDecorator {
     };
 }
 
-export { LoggerInterface } from 'caleido-lib/LoggerInterface';
+export { LoggerInterface } from '../logger';
