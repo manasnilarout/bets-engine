@@ -1,4 +1,3 @@
-import { createDecipheriv, scryptSync } from 'crypto';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import { createConnection, getConnectionOptions } from 'typeorm';
 import { MysqlDriver } from 'typeorm/driver/mysql/MysqlDriver';
@@ -7,9 +6,8 @@ import { config } from '../config';
 import { env } from '../env';
 import { TransactionManager } from '../utils/TransactionManager';
 
-const SECRET_KEY = 'Osm!sAw3som3';
-
 export const typeormLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
+    if (!env.db.enabled) { return; }
 
     const loadedConnectionOptions = await getConnectionOptions();
 
@@ -17,8 +15,8 @@ export const typeormLoader: MicroframeworkLoader = async (settings: Microframewo
         type: env.db.type as any, // See createConnection options for valid types
         host: env.db.host,
         port: env.db.port,
-        username: decryptSync(env.db.username),
-        password: decryptSync(env.db.password),
+        username: env.db.username,
+        password: env.db.password,
         database: env.db.database,
         timezone: config.get('typeORM.mysql.timezone'),
         synchronize: env.db.synchronize,
@@ -43,12 +41,4 @@ export const typeormLoader: MicroframeworkLoader = async (settings: Microframewo
         settings.setData('connection', connection);
         settings.onShutdown(() => connection.close());
     }
-};
-
-const decryptSync = (encryptedText: string): string => {
-    const iv = Buffer.alloc(16, 0); // Initialization vector.
-    const key = scryptSync(SECRET_KEY, 'salt', 32);
-    const decipher = createDecipheriv('aes-256-cbc', key, iv);
-    decipher.update(encryptedText, 'hex');
-    return decipher.final('utf8');
 };

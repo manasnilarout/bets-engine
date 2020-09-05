@@ -32,10 +32,13 @@ export class RedisDB implements ICache {
     }
 
     constructor(
+        connectionOptions?: RedisConnectionOpts,
         onSubscriptionMethod?: (channel: string, message: string) => Promise<void>
     ) {
         this.onSubscription = onSubscriptionMethod
             ? onSubscriptionMethod : this.onSubscriptionDefault;
+        // Set options to a property
+        this._connectionOptions = connectionOptions;
         // Set default subscriber client
         this.subscriber = this.subscriberClient;
     }
@@ -43,12 +46,20 @@ export class RedisDB implements ICache {
     public connect(opts?: RedisConnectionOpts): Promise<RedisClient> {
         return new Promise((resolve, reject) => {
             this._connectionOptions = opts;
-            this.client = this._connectionOptions
-                ? createClient(this._connectionOptions) : createClient();
+            this.client = createClient(opts);
+
             const that = this;
             this.client.on('connect', () => {
+                if (opts.password) {
+                    that.client.auth(opts.password, () => {
+                        that.initiateAllMethods();
+                        resolve(that.client);
+                    });
+                    return;
+                }
+
                 that.initiateAllMethods();
-                resolve(that.client);
+                return resolve(that.client);
             }).on('error', (e) => {
                 that.onError(e);
                 reject(e);
@@ -66,7 +77,7 @@ export class RedisDB implements ICache {
             if (typeof key === 'string') {
                 return await this.getAsync(key);
             } else {
-                const values: Array<{ key: string, value: string }> = [];
+                const values: { key: string, value: string }[] = [];
                 for (const keyField of key) {
                     values.push({
                         key: keyField,
@@ -247,6 +258,7 @@ export class RedisDB implements ICache {
     }
 
     private onError(err: Error): void {
-        // TODO: Need to handle the error
+        console.log('Redis error.');
+        console.log(err);
     }
 }

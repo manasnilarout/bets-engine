@@ -10,6 +10,7 @@ import { httpLoader } from './loaders/httpLoader';
 import { iocLoader } from './loaders/iocLoader';
 import { monitorLoader } from './loaders/monitorLoader';
 import { redisLoader } from './loaders/redisLoader';
+import { scoreLoader } from './loaders/scoreLoader';
 import { swaggerLoader } from './loaders/swaggerLoader';
 import { typeormLoader } from './loaders/typeormLoader';
 import { winstonLoader } from './loaders/winstonLoader';
@@ -52,6 +53,7 @@ if (
         homeLoader,
         httpLoader,
         redisLoader,
+        scoreLoader,
     ];
 }
 

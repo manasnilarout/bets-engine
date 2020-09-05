@@ -51,6 +51,7 @@ export const env = {
         dir: getOsEnv('LOG_DIR'),
     },
     db: {
+        enabled: toBool(getOsEnv('TYPEORM_ENABLED')),
         type: getOsEnv('TYPEORM_CONNECTION'),
         host: getOsEnvOptional('TYPEORM_HOST'),
         port: toNumber(getOsEnvOptional('TYPEORM_PORT')),
@@ -74,27 +75,13 @@ export const env = {
         username: getOsEnv('MONITOR_USERNAME'),
         password: getOsEnv('MONITOR_PASSWORD'),
     },
-    mqtt: {
-        enabled: toBool(getOsEnv('MQTT_ENABLED')),
-        protocol: getOsEnv('MQTT_PROTOCOL'),
-        protocolVersion: toNumber(getOsEnv('MQTT_PROTOCOL_VERSION')),
-        host: getOsEnv('MQTT_HOST') as 'mqtt' | 'mqtts',
-        port: toNumber(getOsEnv('MQTT_PORT')),
-        controllers: getOsPaths('MQTT_CONTROLLERS'),
-    },
-    amqp: {
-        enabled: toBool(getOsEnv('AMQP_ENABLED')),
-        protocol: getOsEnv('AMQP_PROTOCOL'),
-        host: getOsEnv('AMQP_HOST'),
-        port: toNumber(getOsEnv('AMQP_PORT')),
-        controllers: getOsPaths('AMQP_CONTROLLERS'),
-    },
     redis: {
         enabled: toBool(getOsEnv('REDIS_ENABLED')),
         host: getOsEnv('REDIS_HOST'),
         port: getOsEnv('REDIS_PORT'),
+        password: getOsEnvOptional('REDIS_PASSWORD'),
     },
-    prometheusMetrics: {
-        enabled: toBool(getOsEnvOptional('ENABLE_METRICS')),
+    betsEngine: {
+        token: getOsEnv('BETS_API_TOKEN'),
     },
 };

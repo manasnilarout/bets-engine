@@ -12,8 +12,10 @@ export const redisLoader: MicroframeworkLoader = async (settings: Microframework
         const redisConnectionOptions: RedisConnectionOpts = {
             host: env.redis.host,
             port: Number(env.redis.port),
+            password: env.redis.password,
         };
-        const redis = new RedisDB();
+
+        const redis = new RedisDB(redisConnectionOptions);
         await redis.connect(redisConnectionOptions);
         redis.subscribe(config.get('redis.expiryEvent'));
 
