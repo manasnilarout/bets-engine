@@ -1,4 +1,3 @@
-import value from '*.json';
 import Container, { Service } from 'typedi';
 
 import { config } from '../config';
