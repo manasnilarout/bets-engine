@@ -2,6 +2,7 @@ import Container, { Service } from 'typedi';
 
 import { config } from '../config';
 import { Logger, LoggerInterface } from '../decorators/Logger';
+import { AppBadRequestError } from '../errors';
 import { ScoresErrorCodes as ErrorCodes } from '../errors/codes';
 import { RedisDB } from '../utils/redis';
 import { AppService } from './AppService';
@@ -21,6 +22,14 @@ export class ScoresService extends AppService {
         try {
             const rawKeys: string = await this.redisClient.get('sKeys');
             const keys: string[] = JSON.parse(rawKeys);
+
+            if (!keys || (keys && !keys.length)) {
+                throw new AppBadRequestError(
+                    ErrorCodes.noFreshScores.id,
+                    ErrorCodes.noFreshScores.msg
+                );
+            }
+
             const values: any[] = await this.redisClient.useRedisMethod('mget', keys);
 
             const results = values.map((val: any, index: number) => {
