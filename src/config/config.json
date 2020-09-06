@@ -27,6 +27,7 @@
         "sports": {
             "cricket": 3
         },
-        "delayInScoreFetchInSeconds": 3
+        "delayInScoreFetchInSeconds": 3,
+        "defaultExpiryTimeInSeconds": 10
     }
 }
