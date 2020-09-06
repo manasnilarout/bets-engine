@@ -22,7 +22,14 @@ const storeScoreKeys = async (key: string): Promise<void> => {
     const oldKeys = await redis.get('sKeys');
 
     if (oldKeys) {
-        const value = JSON.parse(oldKeys);
+        const value: string[] = JSON.parse(oldKeys);
+        const keysLength = value.length;
+
+        if (keysLength > config.get('betsEngine.maxRecordsToBeStored')) {
+            const keysToBeDeleted = keysLength - config.get('betsEngine.maxRecordsToBeStored');
+            value.splice(0, keysToBeDeleted);
+        }
+
         value.push(key);
         return await redis.set('sKeys', JSON.stringify(value));
     }

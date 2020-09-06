@@ -28,6 +28,7 @@
             "cricket": 3
         },
         "delayInScoreFetchInSeconds": 3,
-        "defaultExpiryTimeInSeconds": 10
+        "defaultExpiryTimeInSeconds": 10,
+        "maxRecordsToBeStored": 100
     }
 }
